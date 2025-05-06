@@ -10,22 +10,16 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "public_subnet_cidr" {
-  description = "CIDR block for the public subnet"
-  type        = string
-  default     = "10.0.1.0/24"
+variable "public_subnet_cidrs" {
+  description = "List of CIDR blocks for public subnets"
+  type        = list(string)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
-variable "private_subnet_cidr" {
-  description = "CIDR block for the private subnet"
-  type        = string
-  default     = "10.0.2.0/24"
-}
-
-variable "instance_count" {
-  description = "Number of EC2 instances to create"
-  type        = number
-  default     = 1
+variable "private_subnet_cidrs" {
+  description = "List of CIDR blocks for private subnets"
+  type        = list(string)
+  default     = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
 variable "ami_id" {
@@ -43,7 +37,7 @@ variable "custom_port" {
 variable "environment" {
   description = "Environment tag"
   type        = string
-  default     = "development"
+  default     = "production"
 }
 
 variable "min_size" {
