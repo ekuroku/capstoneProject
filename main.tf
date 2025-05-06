@@ -1,0 +1,43 @@
+module "vpc" {
+  source              = "./modules/vpc"
+  vpc_cidr            = var.vpc_cidr
+  public_subnet_cidr  = var.public_subnet_cidr
+  private_subnet_cidr = var.private_subnet_cidr
+  environment         = var.environment
+}
+
+module "security_group" {
+  source      = "./modules/security_group"
+  vpc_id      = module.vpc.vpc_id
+  custom_port = var.custom_port
+}
+
+
+module "alb" {
+  source             = "./modules/alb"
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.vpc.public_subnet_ids
+  security_group_id = module.security_group.sg_id
+  custom_port       = var.custom_port
+  environment       = var.environment
+
+  depends_on = [module.vpc]
+}
+
+module "autoscaling" {
+  source              = "./modules/autoscaling"
+  ami_id              = var.ami_id
+  instance_type       = "t2.micro"
+  min_size            = var.min_size
+  max_size            = var.max_size
+  desired_capacity    = var.desired_capacity
+  vpc_zone_identifier = module.vpc.private_subnet_ids
+  target_group_arns   = [module.alb.target_group_arn]
+  security_group_ids  = [module.security_group.sg_id]
+  github_repo         = var.github_repo
+  custom_port         = var.custom_port
+  environment         = var.environment
+
+  depends_on = [module.alb, module.security_group]
+}
+
