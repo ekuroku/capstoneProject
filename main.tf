@@ -1,8 +1,8 @@
 module "vpc" {
   source              = "./modules/vpc"
   vpc_cidr            = var.vpc_cidr
-  public_subnet_cidr  = var.public_subnet_cidr
-  private_subnet_cidr = var.private_subnet_cidr
+  public_subnet_cidrs = var.public_subnet_cidrs  # Updated to match module variable name
+  private_subnet_cidrs = var.private_subnet_cidrs # Updated to match module variable name
   environment         = var.environment
 }
 
@@ -10,8 +10,8 @@ module "security_group" {
   source      = "./modules/security_group"
   vpc_id      = module.vpc.vpc_id
   custom_port = var.custom_port
+  environment = var.environment
 }
-
 
 module "alb" {
   source             = "./modules/alb"
@@ -40,4 +40,3 @@ module "autoscaling" {
 
   depends_on = [module.alb, module.security_group]
 }
-
