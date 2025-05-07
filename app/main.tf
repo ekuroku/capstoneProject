@@ -1,5 +1,5 @@
 module "vpc" {
-  source              = "./modules/vpc"
+  source              = "../modules/vpc"
   vpc_cidr            = var.vpc_cidr
   public_subnet_cidrs = var.public_subnet_cidrs  # Updated to match module variable name
   private_subnet_cidrs = var.private_subnet_cidrs # Updated to match module variable name
@@ -7,14 +7,14 @@ module "vpc" {
 }
 
 module "security_group" {
-  source      = "./modules/security_group"
+  source      = "../modules/security_group"
   vpc_id      = module.vpc.vpc_id
   custom_port = var.custom_port
   environment = var.environment
 }
 
 module "alb" {
-  source             = "./modules/alb"
+  source             = "../modules/alb"
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   security_group_id = module.security_group.sg_id
@@ -25,7 +25,7 @@ module "alb" {
 }
 
 module "autoscaling" {
-  source              = "./modules/autoscaling"
+  source              = "../modules/autoscaling"
   ami_id              = var.ami_id
   instance_type       = "t2.micro"
   min_size            = var.min_size
