@@ -22,6 +22,7 @@ resource "aws_launch_template" "this" {
     custom_port = var.custom_port
   }))
 
+
   tag_specifications {
     resource_type = "instance"
 

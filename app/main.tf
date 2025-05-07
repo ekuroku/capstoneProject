@@ -34,8 +34,8 @@ module "autoscaling" {
   vpc_zone_identifier = module.vpc.private_subnet_ids
   target_group_arns   = [module.alb.target_group_arn]
   security_group_ids  = [module.security_group.sg_id]
-  #github_repo         = var.github_repo
-  #custom_port         = var.custom_port
+  github_repo         = var.github_repo
+  custom_port         = var.custom_port
   environment         = var.environment
 
   depends_on = [module.alb, module.security_group]
