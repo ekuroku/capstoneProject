@@ -8,4 +8,4 @@ environment     = "development"
 min_size        = 2
 max_size        = 4
 desired_capacity = 2
-github_repo     = "https://github.com/msutton150/aws-engagement-ready-infra-ws"
+#github_repo     = "https://github.com/msutton150/aws-engagement-ready-infra-ws"

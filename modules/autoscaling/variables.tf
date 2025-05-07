@@ -42,15 +42,15 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "github_repo" {
-  description = "GitHub repository to clone for application deployment"
-  type        = string
-}
+#variable "github_repo" {
+#  description = "GitHub repository to clone for application deployment"
+#  type        = string
+#}
 
-variable "custom_port" {
-  description = "Custom port for the application"
-  type        = number
-}
+#variable "custom_port" {
+#  description = "Custom port for the application"
+#  type        = number
+#}
 
 variable "environment" {
   description = "Environment tag"

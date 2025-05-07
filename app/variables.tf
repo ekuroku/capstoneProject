@@ -58,8 +58,8 @@ variable "desired_capacity" {
   default     = 2
 }
 
-variable "github_repo" {
-  description = "GitHub repository to clone for application deployment"
-  type        = string
-  default     = "https://github.com/msutton150/aws-engagement-ready-infra-ws"
-}
+#variable "github_repo" {
+##  description = "GitHub repository to clone for application deployment"
+#  type        = string
+#  default     = "https://github.com/msutton150/aws-engagement-ready-infra-ws"
+#}
