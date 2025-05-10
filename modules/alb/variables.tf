@@ -13,9 +13,10 @@ variable "security_group_id" {
   type        = string
 }
 
-variable "custom_port" {
+variable "target_port" {
   description = "Target port for the ALB"
   type        = number
+  default     = 80
 }
 
 variable "environment" {

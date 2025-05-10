@@ -7,4 +7,5 @@ environment          = "development"
 min_size             = 1
 max_size             = 2
 desired_capacity     = 1
+target_port          = 80
 github_repo          = "https://github.com/msutton150/aws-engagement-ready-infra-ws"

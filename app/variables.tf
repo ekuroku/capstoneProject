@@ -28,10 +28,10 @@ variable "ami_id" {
   default     = "ami-0f88e80871fd81e91"
 }
 
-variable "custom_port" {
+variable "target_port" {
   description = "Custom port to open (default for Vector)"
   type        = number
-  default     = 8501
+  default     = 80
 }
 
 variable "environment" {

@@ -17,7 +17,7 @@ module "alb" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   security_group_id = module.security_group.sg_id
-  custom_port       = var.custom_port
+  target_port       = var.target_port
   environment       = var.environment
 
   depends_on = [module.vpc]
@@ -35,6 +35,5 @@ module "autoscaling" {
   security_group_ids  = [module.security_group.sg_id]
   github_repo         = var.github_repo
   environment         = var.environment
-
   depends_on = [module.alb, module.security_group]
 }
