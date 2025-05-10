@@ -1,20 +1,19 @@
 module "vpc" {
-  source              = "../modules/vpc"
-  vpc_cidr            = var.vpc_cidr
-  public_subnet_cidrs = var.public_subnet_cidrs  # Updated to match module variable name
+  source               = "../modules/vpc"
+  vpc_cidr             = var.vpc_cidr
+  public_subnet_cidrs  = var.public_subnet_cidrs  # Updated to match module variable name
   private_subnet_cidrs = var.private_subnet_cidrs # Updated to match module variable name
-  environment         = var.environment
+  environment          = var.environment
 }
 
 module "security_group" {
   source      = "../modules/security_group"
   vpc_id      = module.vpc.vpc_id
-  custom_port = var.custom_port
   environment = var.environment
 }
 
 module "alb" {
-  source             = "../modules/alb"
+  source            = "../modules/alb"
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   security_group_id = module.security_group.sg_id
@@ -35,7 +34,6 @@ module "autoscaling" {
   target_group_arns   = [module.alb.target_group_arn]
   security_group_ids  = [module.security_group.sg_id]
   github_repo         = var.github_repo
-  custom_port         = var.custom_port
   environment         = var.environment
 
   depends_on = [module.alb, module.security_group]

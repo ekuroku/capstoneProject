@@ -2,22 +2,15 @@ resource "aws_launch_template" "this" {
   name_prefix   = "${var.environment}-lt-"
   image_id      = var.ami_id
   instance_type = var.instance_type
-
-  }
+  
 
   network_interfaces {
     associate_public_ip_address = false
-    security_groups            = var.security_group_ids
+    security_groups             = var.security_group_ids
   }
-
-  user_data = base64encode(templatefile("../module/ec2/user_data/user_data.sh", {
-    github_repo = var.github_repo
-  }))
-
-
+  user_data = base64encode(templatefile("${path.module}/user_data.sh",{}))
   tag_specifications {
     resource_type = "instance"
-
     tags = {
       Name        = "${var.environment}-instance"
       Environment = var.environment
@@ -26,7 +19,6 @@ resource "aws_launch_template" "this" {
 
   tag_specifications {
     resource_type = "volume"
-
     tags = {
       Name        = "${var.environment}-volume"
       Environment = var.environment
@@ -37,7 +29,6 @@ resource "aws_launch_template" "this" {
     create_before_destroy = true
   }
 }
-
 resource "aws_autoscaling_group" "this" {
   name_prefix          = "${var.environment}-asg-"
   vpc_zone_identifier  = var.vpc_zone_identifier
