@@ -1,8 +1,8 @@
 #!/bin/bash
-yum update -y
-yum install -y httpd git
-systemctl start httpd
-systemctl enable httpd
+sudo yum update -y
+sudo yum install -y httpd git
+sudo systemctl start httpd
+sudo systemctl enable httpd
 cd /var/www/html
-git init
-git pull https://github.com/drehnstrom/space-invaders.git
+sudo git init
+#git pull https://github.com/drehnstrom/space-invaders.git
