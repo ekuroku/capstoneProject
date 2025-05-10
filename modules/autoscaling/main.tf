@@ -3,13 +3,6 @@ resource "aws_launch_template" "this" {
   image_id      = var.ami_id
   instance_type = var.instance_type
 
-  block_device_mappings {
-    device_name = "/dev/sda1"
-
-    ebs {
-      volume_size = 8
-      volume_type = "gp2"
-    }
   }
 
   network_interfaces {
@@ -17,9 +10,8 @@ resource "aws_launch_template" "this" {
     security_groups            = var.security_group_ids
   }
 
-  user_data = base64encode(templatefile("${path.module}/user_data.sh", {
+  user_data = base64encode(templatefile("../module/ec2/user_data/user_data.sh", {
     github_repo = var.github_repo
-    custom_port = var.custom_port
   }))
 
 

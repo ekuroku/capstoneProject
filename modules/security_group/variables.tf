@@ -3,10 +3,6 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "custom_port" {
-  description = "Custom port to open"
-  type        = number
-}
 
 variable "environment" {
   description = "Environment tag"

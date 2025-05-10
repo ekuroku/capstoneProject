@@ -47,10 +47,6 @@ variable "github_repo" {
   type        = string
 }
 
-variable "custom_port" {
-  description = "Custom port for the application"
-  type        = number
-}
 
 variable "environment" {
   description = "Environment tag"
